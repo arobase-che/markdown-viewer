@@ -643,3 +643,7 @@ color: currentColor;
 .file {
     list-style: circle;
 }
+.file a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

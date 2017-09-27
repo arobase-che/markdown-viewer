@@ -9,6 +9,13 @@ const converter = new showdown.Converter();
 const app = express();
 const path = 'md';
 
+converter.setOption('parseImgDimensions', 'true');
+converter.setOption('literalMidWordUnderscores', 'true');
+converter.setOption('literalMidWordAsterisks', 'true');
+converter.setOption('strikethrough', 'true');
+converter.setOption('tables', 'true');
+converter.setOption('tasklists', 'true');
+
 app.use(express.static('public'));
 
 app.get('/' + path + '/*', function(req, res) {
