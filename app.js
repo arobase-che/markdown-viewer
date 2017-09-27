@@ -31,11 +31,7 @@ app.get('/data', function(req, res) {
 });
 
 app.get('/img/*', function (req, res) {
-    fs.readFile(path + req.url.replace('/img', ''), 'utf8', function(err, data) {
-        if (err)
-            return console.log(err);
-        res.send(data);
-    });
+    res.sendFile('/' + path + req.url.replace('/img', ''))
 });
 
 app.get('/', function(req, res) {
