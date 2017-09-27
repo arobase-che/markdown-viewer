@@ -3,16 +3,12 @@ $(document).ready(function() {
         $('#tree').append(addDirectory(data));
 
         $('a').click(function(e) {
-            $('#md').empty();
-            $('.spinner').show();
             e.preventDefault();
             $.get(this.href, function(data) {
-                $('.spinner').hide();
                 $('#md').html(data);
             });
         });
     });
-    $('.spinner').hide();
 });
 
 function addDirectory(data) {
