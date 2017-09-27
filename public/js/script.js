@@ -3,6 +3,7 @@ $(document).ready(function() {
         $('#tree').append(addDirectory(data));
 
         $('a').click(function(e) {
+            $('#md').remove();
             $('.spinner').show();
             e.preventDefault();
             $.get(this.href, function(data) {
