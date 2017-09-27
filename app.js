@@ -15,17 +15,6 @@ app.get('/' + path + '/*', function(req, res) {
     fs.readFile(req.url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
-        /*fs.readFile('public/css/style.css', 'utf8', function(err, style) {
-            var html = '<html>';
-            html += '<head>';
-            html += '<style>' + style + '</style>';
-            html += '</head>';
-            html += '<body class=\'markdown-preview\' data-use-github-style>';
-            html += converter.makeHtml(data);
-            html += '</body>';
-            html += '</html>';
-            res.send(html);
-        });*/
         res.send(converter.makeHtml(data));
     });
 });
