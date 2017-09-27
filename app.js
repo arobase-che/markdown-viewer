@@ -31,7 +31,9 @@ app.get('/data', function(req, res) {
 });
 
 app.get('/img/*', function (req, res) {
-    res.sendFile('/' + path + req.url.replace('/img', ''))
+    var img = fs.readFileSync(path + req.url.replace('/img', ''));
+    res.writeHead(200, {'Content-Type': 'image/gif' });
+    res.end(img, 'binary');
 });
 
 app.get('/', function(req, res) {
