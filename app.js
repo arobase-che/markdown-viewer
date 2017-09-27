@@ -30,6 +30,10 @@ app.get('/data', function(req, res) {
     res.send(dirTree(path, {extensions:/\.md/}));
 });
 
+app.get('/img/*', function (req, res) {
+    res.sendFile(req.url.replace('/img/', ''));
+});
+
 app.get('/', function(req, res) {
     fs.readFile('public/index.html', 'utf8', function(err, data) {
         if (err)
@@ -57,7 +61,7 @@ app.get('*', function(req, res) {
     });
 });
 
-var server = app.listen(80, function() {
+var server = app.listen(8080, function() {
     var host = server.address().address;
     var port = server.address().port;
     console.log("App listening at http://%s:%s", host, port);
