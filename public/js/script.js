@@ -4,9 +4,16 @@ $(document).ready(function() {
 
         $('a').click(function(e) {
             e.preventDefault();
+            e.stopPropagation();
             $.get(this.href, function(data) {
                 $('#md').html(data);
             });
+        });
+
+        $('.directory').find('ul').hide();
+        $('.directory').click(function(e) {
+            e.stopPropagation();
+            $(this).children('ul').slideToggle();
         });
     });
 });
@@ -22,9 +29,11 @@ function addDirectory(data) {
             a.appendChild(text);
             a.href = item.path;
             li.appendChild(a);
+            li.classList.add("file");
         } else {
             li.appendChild(text);
             li.appendChild(addDirectory(item));
+            li.classList.add("directory");
         }
         ul.appendChild(li);
     });

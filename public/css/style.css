@@ -636,3 +636,10 @@ color: currentColor;
 #tree {
     border-right: 1px solid rgb(238, 238, 238);
 }
+.directory {
+    cursor: pointer;
+    list-style-type: disc;
+}
+.file {
+    list-style: circle;
+}
