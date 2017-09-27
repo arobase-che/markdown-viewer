@@ -42,7 +42,12 @@ app.get('/', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    res.status(404).send('Are you a teapot ?');
+    console.log("404 - " + req.url);
+    fs.readFile('public/404.html', 'utf8', function(err, data) {
+        if (err)
+            return console.log(err);
+        res.status(404).send(data);
+    });
 });
 
 var server = app.listen(80, function() {
