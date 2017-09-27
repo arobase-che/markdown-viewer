@@ -31,7 +31,11 @@ app.get('/data', function(req, res) {
 });
 
 app.get('/img/*', function (req, res) {
-    res.sendFile(req.url.replace('/img/', ''));
+    fs.readFile(path + req.url.replace('/img', ''), 'utf8', function(err, data) {
+        if (err)
+            return console.log(err);
+        res.send(data);
+    });
 });
 
 app.get('/', function(req, res) {
@@ -61,7 +65,7 @@ app.get('*', function(req, res) {
     });
 });
 
-var server = app.listen(8080, function() {
+var server = app.listen(80, function() {
     var host = server.address().address;
     var port = server.address().port;
     console.log("App listening at http://%s:%s", host, port);
