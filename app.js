@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const converter = new showdown.Converter();
 const app = express();
-const path = 'md'
+const path = 'md';
 
 app.use(express.static('public'));
 
@@ -41,7 +41,11 @@ app.get('/', function(req, res) {
     });
 });
 
-var server = app.listen(8080, function() {
+app.get('*', function(req, res) {
+    res.status(404).send('Are you a teapot ?');
+});
+
+var server = app.listen(80, function() {
     var host = server.address().address;
     var port = server.address().port;
     console.log("App listening at http://%s:%s", host, port);
