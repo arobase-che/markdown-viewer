@@ -1,0 +1,16 @@
+{
+  "name": "markdown-preview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "directory-tree": "^2.0.0",
+    "express": "^4.15.5",
+    "showdown": "^1.7.4"
+  },
+  "author": "Titely",
+  "license": ""
+}
