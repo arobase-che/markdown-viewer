@@ -9,6 +9,12 @@ const converter = new showdown.Converter();
 const app = express();
 const path = 'md';
 
+const access = fs.createWriteStream('node.access.log', {flags: 'a'});
+const error  = fs.createWriteStream('node.error.log',  {flags: 'a'});
+
+process.stdout.write = access.write.bind(access);
+process.stderr.write = error.write.bind(error);
+
 converter.setOption('parseImgDimensions', 'true');
 converter.setOption('literalMidWordUnderscores', 'true');
 converter.setOption('literalMidWordAsterisks', 'true');
@@ -19,6 +25,7 @@ converter.setOption('tasklists', 'true');
 app.use(express.static('public'));
 
 app.get('/' + path + '/*', function(req, res) {
+    console.log("200 - " + req.url);
     fs.readFile(req.url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
@@ -27,16 +34,19 @@ app.get('/' + path + '/*', function(req, res) {
 });
 
 app.get('/data', function(req, res) {
+    console.log("200 - " + req.url);
     res.send(dirTree(path, {extensions:/\.md/}));
 });
 
 app.get('/img/*', function (req, res) {
+    console.log("200 - " + req.url);
     var img = fs.readFileSync(req.url.replace('/img', path));
     res.writeHead(200, {'Content-Type': 'image/gif' });
     res.end(img, 'binary');
 });
 
 app.get('/', function(req, res) {
+    console.log("200 - " + req.url);
     fs.readFile('public/index.html', 'utf8', function(err, data) {
         if (err)
             return console.log(err);
@@ -45,7 +55,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    console.log("404 - " + req.url);
+    console.error("404 - " + req.url);
     fs.readFile('public/404.md', 'utf8', function(err, data) {
         if (err)
             return console.log(err);
