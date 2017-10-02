@@ -56,7 +56,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    console.log("[" + new Date() + "] > " + "404 - " + req.url);
+    console.error("[" + new Date() + "] > " + "404 - " + req.url);
     fs.readFile('public/404.md', 'utf8', function(err, data) {
         if (err)
             return console.log(err);
@@ -77,5 +77,5 @@ app.get('*', function(req, res) {
 var server = app.listen(80, function() {
     var host = server.address().address;
     var port = server.address().port;
-    console.log("App listening at http://%s:%s", host, port);
+    console.log("[" + new Date() + "] > " + "App listening at http://%s:%s", host, port);
 });
