@@ -25,8 +25,9 @@ converter.setOption('tasklists', 'true');
 app.use(express.static('public'));
 
 app.get('/' + path + '/*', function(req, res) {
-    console.log("[" + new Date() + "] > " + "200 - " + req.url);
-    fs.readFile(req.url.substr(1), 'utf8', function(err, data) {
+    var url = decodeURI(req.url);
+    console.log("[" + new Date() + "] > " + "200 - " + url);
+    fs.readFile(url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
         res.send(converter.makeHtml(data));
