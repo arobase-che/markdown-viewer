@@ -14,6 +14,9 @@ const error  = fs.createWriteStream('node.error.log');
 
 process.stdout.write = access.write.bind(access);
 process.stderr.write = error.write.bind(error);
+process.on('uncaughtException', function(err) {
+    console.error("[" + new Date() + "] > " + "Error - " + err);
+});
 
 converter.setOption('parseImgDimensions', 'true');
 converter.setOption('literalMidWordUnderscores', 'true');
