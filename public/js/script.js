@@ -18,6 +18,7 @@ $(document).ready(function() {
     });
 });
 
+
 function addDirectory(data) {
     var ul = document.createElement('ul');
     data.children.forEach(function(item) {
@@ -32,6 +33,7 @@ function addDirectory(data) {
             li.classList.add("file");
         } else {
             li.appendChild(text);
+            li.tabIndex = 0
             li.appendChild(addDirectory(item));
             li.classList.add("directory");
         }
