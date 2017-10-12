@@ -1,11 +1,11 @@
 'use-strict';
 
-const showdown  = require('showdown');
 const dirTree = require('directory-tree');
 const express = require('express');
 const fs = require('fs');
 
-const converter = new showdown.Converter();
+var md = require('markdown-it')();
+
 const app = express();
 const path = 'md';
 
@@ -18,12 +18,6 @@ process.on('uncaughtException', function(err) {
     console.error("[" + new Date() + "] > " + "Error - " + err);
 });
 
-converter.setOption('parseImgDimensions', 'true');
-converter.setOption('literalMidWordUnderscores', 'true');
-converter.setOption('literalMidWordAsterisks', 'true');
-converter.setOption('strikethrough', 'true');
-converter.setOption('tables', 'true');
-converter.setOption('tasklists', 'true');
 
 app.use(express.static('public'));
 
@@ -33,7 +27,7 @@ app.get('/' + path + '/*', function(req, res) {
     fs.readFile(url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
-        res.send(converter.makeHtml(data));
+        res.send(md.render(data))
     });
 });
 
