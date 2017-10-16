@@ -7,13 +7,16 @@ $(document).ready(function() {
             e.stopPropagation();
             $.get(this.href, function(data) {
                 $('#md').html(data);
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             });
         });
+    
 
         $('.directory').find('ul').hide();
         $('.directory').click(function(e) {
             e.stopPropagation();
             $(this).children('ul').slideToggle();
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         });
     });
 });
