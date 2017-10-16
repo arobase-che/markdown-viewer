@@ -4,7 +4,7 @@ const dirTree = require('directory-tree');
 const express = require('express');
 const fs = require('fs');
 
-var md = require('markdown-it')();
+var md = require('markdown-it')({'html':true, 'linkify':true});
 
 const app = express();
 const path = 'md';
