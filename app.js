@@ -4,20 +4,27 @@ const dirTree = require('directory-tree');
 const express = require('express');
 const fs = require('fs');
 
-var md = require('markdown-it')({'html':true, 'linkify':true});
 
 const app = express();
 const path = 'md';
 
-const access = fs.createWriteStream('node.access.log');
-const error  = fs.createWriteStream('node.error.log');
-
-process.stdout.write = access.write.bind(access);
-process.stderr.write = error.write.bind(error);
 process.on('uncaughtException', function(err) {
     console.error("[" + new Date() + "] > " + "Error - " + err);
 });
 
+
+const report = require('vfile-reporter');
+
+const remark = require('remark');
+const guide = require('remark-preset-lint-markdown-style-guide');
+const html = require('remark-html');
+const kbd = require('remark-kbd');
+const math = require('remark-math');
+const mermaid = require('remark-mermaid-simple');
+const highlight = require('remark-highlight.js');
+
+
+const useLandScript = " <script> mermaid.contentLoaded(); </script>"
 
 app.use(express.static('public'));
 
@@ -27,7 +34,18 @@ app.get('/' + path + '/*', function(req, res) {
     fs.readFile(url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
-        res.send(md.render(data));
+    remark()
+      .use(guide)
+      .use(kbd)
+      .use(math)
+      .use(mermaid)
+      .use(highlight)
+      .use(html)
+      .process(data, function (err, file) {
+        //    console.log(head + String(file) + foot);
+        res.send(String(file) + useLandScript);
+        console.error(report(err || file));
+      });
     });
 });
 
