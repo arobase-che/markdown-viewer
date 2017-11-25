@@ -22,6 +22,8 @@ const kbd = require('remark-kbd');
 const math = require('remark-math');
 const mermaid = require('remark-mermaid-simple');
 const highlight = require('remark-highlight.js');
+const sb = require('remark-special-box');
+const qcm = require('remark-qcm');
 
 
 const useLandScript = " <script> mermaid.contentLoaded(); </script>"
@@ -39,6 +41,8 @@ app.get('/' + path + '/*', function(req, res) {
       .use(kbd)
       .use(math)
       .use(mermaid)
+      .use(sb)
+      .use(qcm)
       .use(highlight)
       .use(html)
       .process(data, function (err, file) {
@@ -56,9 +60,20 @@ app.get('/data', function(req, res) {
 
 app.get('/img/*', function (req, res) {
     console.log("[" + new Date() + "] > " + "200 - " + req.url);
-    var img = fs.readFileSync(req.url.replace('/img', path));
-    res.writeHead(200, {'Content-Type': 'image/gif' });
-    res.end(img, 'binary');
+    if( path == '/img/ic_info_black_48px.svg' ||
+        path == '/imr/ic_error_black_48px.svg' ||
+        path == '/imr/ic_good_black_48px.svg' ||
+        path == '/imr/ic_bad_black_48px.svg' ||
+        path == '/imr/ic_comment_black_48px.svg' ||
+        path == '/imr/ic_help_black_48px.svg' ) {
+      const img = fs.readFileSync(path);
+      res.writeHead(200, {'Content-Type': 'image/svg' });
+      res.end(img, 'binary');
+    }else {
+      const img = fs.readFileSync(req.url.replace('/img', path));
+      res.writeHead(200, {'Content-Type': 'image/gif' });
+      res.end(img, 'binary');
+    }
 });
 
 app.get('/', function(req, res) {

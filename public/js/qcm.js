@@ -12,6 +12,10 @@ function check(id/*, tab*/) {
     const fieldQCM = document.getElementById(id);
 
     Array.from(fieldQCM.getElementsByTagName('INPUT')).forEach((input) => {
+        if( input.type != 'checkbox' )
+          return;
+
+
         const label = document.querySelector("label[for='" + input.id + "']");
         if (input.checked) {
             Array.from(label.getElementsByClassName('hiden_block_quote')).forEach(((child) => {
@@ -24,6 +28,7 @@ function check(id/*, tab*/) {
             }
                 break;
             case '=': {
+                console.log("Good")
                 label.style.color = '#00BB00';
             }
                 break;
@@ -33,6 +38,7 @@ function check(id/*, tab*/) {
             }
                 break;
             default: {
+                console.log("Oups")
                 // empty
             }
         }
