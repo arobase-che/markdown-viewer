@@ -15,8 +15,11 @@
     "remark-html": "^6.0.1",
     "remark-kbd": "^1.0.6",
     "remark-math": "^1.0.3",
-    "remark-mermaid-simple": "file:///home/ache/git/remark-mermaid-simple",
+    "remark-mermaid-simple": "git+ssh://ache@git.ache.one:git/remark-mermaid-simple",
     "remark-preset-lint-markdown-style-guide": "^2.1.1",
+    "remark-qcm": "git+ssh://ache@git.ache.one:git/remark-qcm",
+    "remark-special-box": "git+ssh://ache@git.ache.one:git/remark-special-box",
+    "unist-util-visit": "^1.2.0",
     "vfile-reporter": "^4.0.0"
   },
   "author": "Titely",
