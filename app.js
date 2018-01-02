@@ -45,15 +45,23 @@ app.get('/' + path + '/*', function(req, res) {
     var query = req.query;
 
     console.log("[" + new Date() + "] > " + "200 - " + url);
+    if( query && query['raw'] == 'true' ) {
+      res.sendFile(url, { root: '.',
+                          dotfiles:'deny',
+                          headers: {
+                              'x-timestamp': Date.now(),
+                              'x-sent': true} }, function(err) {
+                                if( err ) {
+                                  next(err);
+                                } else {
+                                  console.log("Sent : ", url);
+                                }
+                              });
+      return;
+    }
     fs.readFile(url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
-
-        if( query && query['raw'] == 'true' ) {
-          console.log("PLEASE");
-          res.send( data )
-          return;
-        }
 
 //    remark()
       /*  Debbug comment
@@ -70,10 +78,10 @@ app.get('/' + path + '/*', function(req, res) {
 
       unified()
       .use(remark)
-      .use(guide)
+//      .use(guide)
       .use(mermaid)
       .use(lineInput)
-      .use(textInput)
+//      .use(textInput)
       .use(math)
       .use(kbd)
       .use(sb)
