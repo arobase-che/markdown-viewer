@@ -36,15 +36,25 @@ const remark = require('remark-parse');
 const inspect = require('unist-util-inspect');
 
 const useLandScript = " <script> mermaid.contentLoaded(); </script>"
+const userSide_Button = '<button class="raw_button" ><div><div>Raw</div></div></button></form>'
 
 app.use(express.static('public'));
 
 app.get('/' + path + '/*', function(req, res) {
-    var url = decodeURI(req.url);
+    var url = req._parsedUrl.pathname;
+    var query = req.query;
+
     console.log("[" + new Date() + "] > " + "200 - " + url);
     fs.readFile(url.substr(1), 'utf8', function(err, data) {
         if (err)
             return console.log(err);
+
+        if( query && query['raw'] == 'true' ) {
+          console.log("PLEASE");
+          res.send( data )
+          return;
+        }
+
 //    remark()
       /*  Debbug comment
       const a = unified()
@@ -75,7 +85,8 @@ app.get('/' + path + '/*', function(req, res) {
       .use(rehypeStringify)
 
       .process(data, function (err, file) {
-        res.send(String(file) + useLandScript);
+        res.send(String(file) + useLandScript +
+          '<a href="' +  url + '?raw=true" class="no-style">' + userSide_Button + '</a>');
         console.error(report(err || file));
       });
     });
