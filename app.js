@@ -41,7 +41,7 @@ const userSide_Button = '<button class="raw_button" ><div><div>Raw</div></div></
 app.use(express.static('public'));
 
 app.get('/' + path + '/*', function(req, res) {
-    var url = req._parsedUrl.pathname;
+    var url = decodeURI(req._parsedUrl.pathname);
     var query = req.query;
 
     console.log("[" + new Date() + "] > " + "200 - " + url);
