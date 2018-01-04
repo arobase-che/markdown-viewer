@@ -38,6 +38,28 @@ const inspect = require('unist-util-inspect');
 const useLandScript = " <script> mermaid.contentLoaded(); </script>"
 const userSide_Button = '<button class="raw_button" ><div><div>Raw</div></div></button></form>'
 
+function to_HTML( data, fnc ) {
+      unified()
+      .use(remark)
+//      .use(guide)
+      .use(mermaid)
+      .use(lineInput)
+//      .use(textInput)
+      .use(math)
+      .use(kbd)
+      .use(sb)
+      .use(qcm)
+      .use(highlight)
+      .use(html, {allowDangerousHTML: true})
+      .use(rehypeKatex)
+      .use(raw)
+      .use(rehypeStringify)
+
+      .process(data, fnc );
+}
+
+
+
 app.use(express.static('public'));
 
 app.get('/' + path + '/*', function(req, res) {
@@ -76,23 +98,7 @@ app.get('/' + path + '/*', function(req, res) {
       console.log(inspect(a));
       */
 
-      unified()
-      .use(remark)
-//      .use(guide)
-      .use(mermaid)
-      .use(lineInput)
-//      .use(textInput)
-      .use(math)
-      .use(kbd)
-      .use(sb)
-      .use(qcm)
-      .use(highlight)
-      .use(html, {allowDangerousHTML: true})
-      .use(rehypeKatex)
-      .use(raw)
-      .use(rehypeStringify)
-
-      .process(data, function (err, file) {
+      to_HTML(data, function (err, file) {
         res.send(String(file) + useLandScript +
           '<a href="' +  url + '?raw=true" class="no-style">' + userSide_Button + '</a>');
         console.error(report(err || file));
@@ -138,15 +144,17 @@ app.get('*', function(req, res) {
         if (err)
             return console.log(err);
         fs.readFile('public/css/style.css', 'utf8', function(err, style) {
-            var html = '<html>';
-            html += '<head>';
-            html += '<style>' + style + '</style>';
-            html += '</head>';
-            html += '<body class=\'markdown-preview\' data-use-github-style>';
-            html += converter.makeHtml(data);
-            html += '</body>';
-            html += '</html>';
-            res.status(404).send(html);
+            to_HTML( data, function( err, file ) {
+              var html = '<html>';
+              html += '<head>';
+              html += '<style>' + style + '</style>';
+              html += '</head>';
+              html += '<body class=\'markdown-preview\' data-use-github-style>';
+              html += String(file);
+              html += '</body>';
+              html += '</html>';
+              res.status(404).send(html);
+            });
         });
     });
 });
