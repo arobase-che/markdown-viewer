@@ -148,3 +148,25 @@ kbd {
 .no-style {
  text-decoration: none;
 }
+.valid {
+    border: 2px solid #c0392b;
+    border-radius: 2px;
+    outline: none;
+    border-color: #9f9;
+    box-shadow: 0 0 5px #9f9;
+}
+.invalid {
+
+    border: 2px solid #c0392b;
+    border-radius: 2px;
+    outline: none;
+    border-color: #f99;
+    box-shadow: 0 0 5px #f99;
+}
+.glowing {
+    border: 2px solid #c0392b;
+    border-radius: 2px;
+    outline: none;
+    border-color: #99f;
+    box-shadow: 0 0 5px #99f;
+}
