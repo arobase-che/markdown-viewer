@@ -21,9 +21,10 @@
     "remark-math": "^1.0.0",
     "remark-mermaid-simple": "git+http://git.ache.one/remark-mermaid-simple/",
     "remark-preset-lint-markdown-style-guide": "^2.1.1",
-    "remark-qcm": "git+http://git.ache.one/remark-qcm",
+    "remark-multiple-choice": "git+http://git.ache.one/remark-multiple-choice",
     "remark-rehype": "^3.0.0",
     "remark-special-box": "git+http://git.ache.one/remark-special-box/",
+    "remark-select": "git+http://git.ache.one/remark-select/",
     "remark-text-input": "git+http://git.ache.one/remark-text-input/",
     "unist-util-inspect": "^4.1.2",
     "vfile-reporter": "^4.0.0"

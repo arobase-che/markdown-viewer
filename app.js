@@ -22,8 +22,9 @@ const math = require('remark-math');
 const mermaid = require('remark-mermaid-simple');
 const highlight = require('remark-highlight.js');
 const sb = require('remark-special-box');
-const qcm = require('remark-qcm');
+const multiChoice = require('remark-multiple-choice');
 const lineInput = require('remark-line-input');
+const select    = require('remark-select');
 const textInput = require('remark-text-input');
 
 const raw = require('rehype-raw');
@@ -42,13 +43,13 @@ function to_HTML( data, fnc ) {
       unified()
       .use(remark)
 //      .use(guide)
-      .use(mermaid)
       .use(lineInput)
-//      .use(textInput)
+      .use(textInput)
+      .use(select)
+      .use(multiChoice)
       .use(math)
       .use(kbd)
       .use(sb)
-      .use(qcm)
       .use(highlight)
       .use(html, {allowDangerousHTML: true})
       .use(rehypeKatex)
