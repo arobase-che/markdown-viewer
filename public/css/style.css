@@ -1,8 +1,5 @@
 body { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); overflow: scroll; margin: 5%;}
 
-#tree {
-    border-right: 1px solid rgb(238, 238, 238);
-}
 .directory {
     cursor: pointer;
     list-style-type: disc;
@@ -14,12 +11,7 @@ body { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sa
     padding-top: 5px;
     padding-bottom: 5px;
 }
-@media screen and (max-width:991px) {
-    #tree {
-        border-right: none;
-        border-bottom: 1px solid rgb(238, 238, 238);
-    }
-}
+
 .qcm_item p { margin: 0; padding: 0; display:inline;}
 .qcm_check { padding-left: 32px;}
 .qcm_radio { padding-left: 32px;} 
