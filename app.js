@@ -36,7 +36,7 @@ const remark = require('remark-parse');
 
 const inspect = require('unist-util-inspect');
 
-const useLandScript = ' <script> mermaid.contentLoaded(); </script>';
+const useLandScript = '';
 const userSide_Button = '<button class="raw_button" ><div><div>Raw</div></div></button></form>';
 
 function to_HTML(data, fnc) {
@@ -88,7 +88,6 @@ app.get('/' + path + '/*', (req, res) => {
       /*  Debbug comment
       const a = unified()
       .use(remark)
-      .use(mermaid)
       .use(lineInput)
       .use(textInput)
       .use(html, {allowDangerousHTML: true})
