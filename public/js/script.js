@@ -1,37 +1,38 @@
 'use strict';
 
+/* global document XMLHttpRequest */
+
 document.addEventListener('DOMContentLoaded', () => {
   const httpRequest = new XMLHttpRequest();
-  
+
   httpRequest.onreadystatechange = () => {
-    if( httpRequest.readyState ===4 && httpRequest.status === 200) {
+    if (httpRequest.readyState === 4 && httpRequest.status === 200) {
       const response = httpRequest.responseText;
       const data = JSON.parse(response);
       document.getElementById('tree').appendChild(addDirectory(data));
 
-      Array.from(document.getElementsByTagName('a')).forEach( (a) => {
+      Array.from(document.getElementsByTagName('a')).forEach(a => {
         a.onclick = (function (e) {
           e.preventDefault();
           e.stopPropagation();
           const setMd = new XMLHttpRequest();
           setMd.onreadystatechange = () => {
-            if( setMd.readyState ===4 && setMd.status === 200) {
-              document.getElementById('md');
-              md.innerHTML = setMd.responseText;
+            if (setMd.readyState === 4 && setMd.status === 200) {
+              document.getElementById('md').innerHTML = setMd.responseText;
             }
-          }
+          };
           setMd.open('GET', a.href);
           setMd.send();
         });
       });
-      Array.from(document.getElementsByClassName("directory")).forEach( (dir) => {
-        dir.querySelectorAll('ul').forEach( (ul) => {
+      Array.from(document.getElementsByClassName('directory')).forEach(dir => {
+        dir.querySelectorAll('ul').forEach(ul => {
           ul.style.display = 'none';
         });
-        dir.onclick = ( (e) => {
+        dir.onclick = (e => {
           e.stopPropagation();
 
-          dir.querySelectorAll('ul').forEach( (ul) => {
+          dir.querySelectorAll('ul').forEach(ul => {
             ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
           });
         });

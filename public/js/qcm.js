@@ -1,14 +1,14 @@
 'use strict';
 
+/* eslint-env browser */
+/* exported check */
+
 /*
  * Écrit par Hédy GIRAUDEAU
  *
  */
 
-/* eslint-env browser */
-/* exported check */
-
-function check(id/* , tab */) {
+const check = (id => {
   const fieldQCM = document.getElementById(id);
 
   Array.from(fieldQCM.getElementsByTagName('INPUT')).forEach(input => {
@@ -36,7 +36,7 @@ function check(id/* , tab */) {
         // Empty
     }
   });
-}
+});
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -76,3 +76,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 }, false);
 
+document.check = check;
