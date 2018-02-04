@@ -8,7 +8,7 @@
  *
  */
 
-const check = (id => {
+const check = id => {
   const fieldQCM = document.getElementById(id);
 
   Array.from(fieldQCM.getElementsByTagName('INPUT')).forEach(input => {
@@ -16,11 +16,11 @@ const check = (id => {
       return;
     }
 
-    const label = document.querySelector('label[for=\'' + input.id + '\']');
+    const label = document.querySelector(`label[for='${input.id}']`);
     if (input.checked) {
-      Array.from(label.getElementsByClassName('hiden_block_quote')).forEach((child => {
+      Array.from(label.getElementsByClassName('hiden_block_quote')).forEach(child => {
         child.classList.remove('hiden_block_quote');
-      }));
+      });
     }
     switch (input.className) {
       case '!':
@@ -36,7 +36,7 @@ const check = (id => {
         // Empty
     }
   });
-});
+};
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   listQCM.forEach(field => {
     let listInput = [];
     Array.from(field.getElementsByTagName('INPUT')).forEach(input => {
-      const label = document.querySelector('label[for=\'' + input.id + '\']');
+      const label = document.querySelector(`label[for='${input.id}']`);
       listInput.push({input, label});
       field.removeChild(input);
       field.removeChild(label);

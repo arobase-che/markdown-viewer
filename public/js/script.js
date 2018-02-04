@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('tree').appendChild(addDirectory(data));
 
       Array.from(document.getElementsByTagName('a')).forEach(a => {
-        a.onclick = (function (e) {
+        a.onclick = function (e) {
           e.preventDefault();
           e.stopPropagation();
           const setMd = new XMLHttpRequest();
@@ -23,19 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
           };
           setMd.open('GET', a.href);
           setMd.send();
-        });
+        };
       });
       Array.from(document.getElementsByClassName('directory')).forEach(dir => {
         dir.querySelectorAll('ul').forEach(ul => {
           ul.style.display = 'none';
         });
-        dir.onclick = (e => {
+        dir.onclick = e => {
           e.stopPropagation();
 
           dir.querySelectorAll('ul').forEach(ul => {
             ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
           });
-        });
+        };
       });
     }
   };
