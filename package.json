@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "./node_modules/.bin/rollup -c"
   },
   "dependencies": {
     "directory-tree": "^2.0.0",
@@ -35,6 +36,13 @@
   "license": "",
   "devDependencies": {
     "ava": "^0.25.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.2.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0",
     "xo": "^0.18.2"
   },
   "xo": {
