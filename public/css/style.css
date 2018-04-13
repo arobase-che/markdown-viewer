@@ -162,3 +162,7 @@ kbd {
     border-color: #99f;
     box-shadow: 0 0 5px #99f;
 }
+h1::before { color: #BBB;content: "#  "; }
+h2::before { color: #BBB;content: "##  "; }
+h3::before { color: #BBB;content: "###  "; }
+h4 { margin-left: 60px;}
