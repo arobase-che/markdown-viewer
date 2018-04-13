@@ -102,7 +102,15 @@ app.get('/', (req, res) => {
     res.send(data);
   });
 });
-
+app.get('/edit', (req, res) => {
+  console.log(`[${new Date()}] > ${200} - ${req.url}`);
+  fs.readFile('public/edit.html', 'utf8', (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.send(data);
+  });
+});
 app.get('*', (req, res) => {
   console.error(`[${new Date()}] > ${404} - ${req.url}`);
   fs.readFile('public/404.md', 'utf8', (err, data) => {
