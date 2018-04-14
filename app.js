@@ -62,7 +62,7 @@ app.get(`/${path}/*`, (req, res) => {
       console.log(inspect(a));
       */
 
-    hmd.toHTML(data, (err, file) => {
+    hmd(data, (err, file) => {
       res.send(`${String(file) + useLandScript
       }<a href="${url}?raw=true" class="no-style">${rawButton}</a>`);
       console.error(report(err || file));
@@ -128,7 +128,7 @@ app.get('*', (req, res) => {
         res.status(500).send(html);
         return;
       }
-      hmd.toHTML(data, (err, file) => {
+      hmd(data, (err, file) => {
         if (err) {
           let html = '<html>';
           html += '<body>';
