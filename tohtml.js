@@ -20,6 +20,7 @@ const rehypeKatex = require('rehype-katex');
 const rehypeStringify = require('rehype-stringify');
 const unified = require('unified');
 const remark = require('remark-parse');
+const customBlocks = require('remark-custom-blocks');
 
 
 function toHTML(data, fnc) {
@@ -32,6 +33,29 @@ function toHTML(data, fnc) {
     .use(math)
     .use(kbd)
     .use(sb)
+    .use(customBlocks, {
+      information: {
+        classes: 'special-box information',
+        title:   'optional'
+      },
+      comment: {
+        classes: 'special-box comment',
+        title:   'optional'
+      },
+      attention: {
+        classes: 'special-box attention',
+        title:   'optional'
+      },
+      question: {
+        classes: 'special-box question',
+        title:   'optional'
+      },
+      good: {
+        classes: 'special-box good',
+      },
+      bad: {
+        classes: 'special-box bad',
+      }})
     .use(highlight)
     .use(html, {allowDangerousHTML: true})
     .use(rehypeKatex)
