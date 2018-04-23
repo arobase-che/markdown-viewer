@@ -2,25 +2,23 @@
 
 /* global document XMLHttpRequest */
 
-
 function nodeScriptReplace(node) {
-  if ( node.tagName === 'SCRIPT' ) {
-    node.parentNode.replaceChild( nodeScriptClone(node) , node );
-  }
-  else if(node.children) {
-    for ( const child of node.children ) {
-      nodeScriptReplace( child );
+  if (node.tagName === 'SCRIPT') {
+    node.parentNode.replaceChild(nodeScriptClone(node), node);
+  } else if (node.children) {
+    for (const child of node.children) {
+      nodeScriptReplace(child);
     }
   }
 
   return node;
 }
-function nodeScriptClone(node){
-  const script  = document.createElement("script");
+function nodeScriptClone(node) {
+  const script = document.createElement('script');
 
   script.text = node.innerHTML;
-  [ ...node.attributes].forEach( attr => {
-    script.setAttribute( attr.name, attr.value );
+  [...node.attributes].forEach(attr => {
+    script.setAttribute(attr.name, attr.value);
   });
   return script;
 }

@@ -3,6 +3,7 @@
 const fs = require('fs');
 const dirTree = require('directory-tree');
 const express = require('express');
+const report = require('vfile-reporter');
 
 const hmd = require('./tohtml');
 
@@ -13,12 +14,8 @@ process.on('uncaughtException', err => {
   console.error(`[${new Date()}] > Error - ${err}`);
 });
 
-const report = require('vfile-reporter');
-
 const useLandScript = '';
 const rawButton = '<button class="raw_button" ><div><div>Raw</div></div></button></form>';
-
-
 
 app.use(express.static('public'));
 
@@ -49,18 +46,6 @@ app.get(`/${path}/*`, (req, res) => {
     if (err) {
       return console.log(err);
     }
-
-    //    Remark()
-    /*  Debbug comment
-      const a = unified()
-      .use(remark)
-      .use(lineInput)
-      .use(textInput)
-      .use(html, {allowDangerousHTML: true})
-      .use(raw)
-        .parse(data)
-      console.log(inspect(a));
-      */
 
     hmd(data, (err, file) => {
       res.send(`${String(file) + useLandScript

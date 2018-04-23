@@ -1,11 +1,9 @@
-import uglify from 'rollup-plugin-uglify'
-import builtins from 'rollup-plugin-node-builtins'
-import json from 'rollup-plugin-json'
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
-import globals from 'rollup-plugin-node-globals'
-
-
+import uglify from 'rollup-plugin-uglify';
+import builtins from 'rollup-plugin-node-builtins';
+import json from 'rollup-plugin-json';
+import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import globals from 'rollup-plugin-node-globals';
 
 export default {
   input: 'tohtml.js',
@@ -13,7 +11,7 @@ export default {
     file: 'public/js/hmd.min.js',
     format: 'iife',
     sourcemap: 'inline',
-    name: 'hmd'
+    name: 'hmd',
   },
   plugins: [
     resolve({
@@ -28,6 +26,6 @@ export default {
     }),
     globals(),
     uglify(),
-  ]
+  ],
 };
 

@@ -1,6 +1,4 @@
-const path = 'md';
-
-const report = require('vfile-reporter');
+'use-strict';
 
 /* TODO : Send the result of guide :
   const guide = require('remark-preset-lint-markdown-style-guide');
@@ -22,7 +20,6 @@ const unified = require('unified');
 const remark = require('remark-parse');
 const customBlocks = require('remark-custom-blocks');
 
-
 function toHTML(data, fnc) {
   unified()
     .use(remark)
@@ -36,22 +33,26 @@ function toHTML(data, fnc) {
     .use(customBlocks, {
       information: {
         classes: 'special-box information',
-        title:   'optional'
+        title: 'optional',
       },
       comment: {
         classes: 'special-box comment',
-        title:   'optional'
+        title: 'optional',
       },
       attention: {
         classes: 'special-box attention',
-        title:   'optional'
+        title: 'optional',
       },
       question: {
         classes: 'special-box question',
-        title:   'optional'
+        title: 'optional',
       },
       good: {
         classes: 'special-box good',
+      },
+      secret: {
+        classes: 'special-box secret',
+        title: 'optional',
       },
       bad: {
         classes: 'special-box bad',
