@@ -2,6 +2,29 @@
 
 /* global document XMLHttpRequest */
 
+
+function nodeScriptReplace(node) {
+  if ( node.tagName === 'SCRIPT' ) {
+    node.parentNode.replaceChild( nodeScriptClone(node) , node );
+  }
+  else if(node.children) {
+    for ( const child of node.children ) {
+      nodeScriptReplace( child );
+    }
+  }
+
+  return node;
+}
+function nodeScriptClone(node){
+  const script  = document.createElement("script");
+
+  script.text = node.innerHTML;
+  [ ...node.attributes].forEach( attr => {
+    script.setAttribute( attr.name, attr.value );
+  });
+  return script;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const httpRequest = new XMLHttpRequest();
 
@@ -19,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setMd.onreadystatechange = () => {
             if (setMd.readyState === 4 && setMd.status === 200) {
               document.getElementById('md').innerHTML = setMd.responseText;
+              nodeScriptReplace(document.getElementById('md'));
             }
           };
           setMd.open('GET', a.href);
