@@ -59,8 +59,11 @@ let modification = false;
 let interval = setInterval( () => {
   if( modification ) {
     hmd(edit.innerText, (err, file) => {
-      preview.innerHTML = String(file);
-      modification = false;
+      let finalString = String(file);
+      if( finalString )  {
+        preview.innerHTML = String(file);
+        modification = false;
+      }
     });
   }
 }, 500);
