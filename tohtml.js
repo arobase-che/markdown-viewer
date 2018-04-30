@@ -19,6 +19,7 @@ const rehypeStringify = require('rehype-stringify');
 const unified = require('unified');
 const remark = require('remark-parse');
 const customBlocks = require('remark-custom-blocks');
+const iframes = require('remark-iframes');
 
 function toHTML(data, fnc) {
   unified()
@@ -58,6 +59,26 @@ function toHTML(data, fnc) {
         classes: 'special-box bad',
       }})
     .use(highlight)
+    .use(iframes, {
+      // this key corresponds to the hostname: !(http://hostname/foo)
+      // the config associated to this hostname will apply to any iframe
+      // with a matching hostname
+      'www.youtube.com': {
+        tag: 'IFRAME',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          ['watch?v=', 'embed/'],
+          ['http://', 'https://'],
+        ],
+        thumbnail: {
+          format: 'http://img.youtube.com/vi/{id}/0.jpg',
+          id: '.+/(.+)$'
+        },
+        removeAfter: '&'
+      }
+    })
     .use(html, {allowDangerousHTML: true})
     .use(rehypeKatex)
     .use(raw)
