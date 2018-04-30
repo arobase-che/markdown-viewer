@@ -8,7 +8,6 @@ const html = require('remark-rehype');
 const kbd = require('remark-kbd');
 const math = require('remark-math');
 const highlight = require('remark-highlight.js');
-const sb = require('remark-special-box');
 const multiChoice = require('remark-multiple-choice');
 const lineInput = require('remark-line-input');
 const select = require('remark-select');
@@ -30,7 +29,6 @@ function toHTML(data, fnc) {
     .use(multiChoice)
     .use(math)
     .use(kbd)
-    .use(sb)
     .use(customBlocks, {
       information: {
         classes: 'special-box information',
