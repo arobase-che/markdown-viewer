@@ -162,7 +162,12 @@ kbd {
     border-color: #99f;
     box-shadow: 0 0 5px #99f;
 }
+.view .h1 { font-size:2em; color: #A5B; }
 .view h2::before { color: #BBB;content: "#  "; font: bold 0.95em arial,sans-serif; }
 .view h3::before { color: #BBB;content: "##  "; font: bold 0.95em arial,sans-serif; }
 .view h4::before { color: #BBB;content: "###  "; font: bold 0.95em arial,sans-serif; }
 .view h5 { margin-left: 60px;}
+
+.view h1 { font-size:2em; color: #A5B; }
+.view h2 { font-size:1.5em; color: #BB8; }
+.view h3 { font-size:1.25em; color: #AC4; }
